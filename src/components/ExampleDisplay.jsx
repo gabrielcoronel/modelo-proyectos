@@ -1,8 +1,13 @@
 import { useState } from 'react'
 import { useHover } from '../utilities/hooks'
 import { GrPrevious, GrNext } from "react-icons/gr"
-import first from '../assets/example-pictures/1.jpeg'
 import ModalCloseButton from './ModalCloseButton'
+import InformPicture from '../assets/example-pictures/informar.jpeg'
+import PlanPicture from '../assets/example-pictures/planificar.jpeg'
+import DecidePicture from '../assets/example-pictures/decidir.jpeg'
+import ExecutePicture from '../assets/example-pictures/ejecutar.jpeg'
+import ControlPicture from '../assets/example-pictures/controlar.jpeg'
+import EvaluatePicture from '../assets/example-pictures/valorar.jpeg'
 
 const CarouselButton = ({ icon, onClick, isHidden }) => {
   const [isHovering, hoveringEvents] = useHover()
@@ -38,7 +43,7 @@ const StepCarousel = ({ steps }) => {
   }
 
   return (
-    <div className="bg-background flex justify-evenly items-center gap-x-7 w-full">
+    <div className="bg-background flex justify-evenly items-center gap-x-3 w-full">
       <CarouselButton
         icon={<GrPrevious />}
         onClick={decremenetCurrentIndex}
@@ -46,10 +51,10 @@ const StepCarousel = ({ steps }) => {
       />
 
       <div
-        className="flex flex-col justify-center items-center gap-y-3"
+        className="flex flex-col justify-center items-center w-2/3"
       >
         <img
-          className="h-80 w-100 rounded-md"
+          className="h-full w-60 rounded-md -rotate-90"
           src={steps[currentIndex].picture}
         />
 
@@ -69,9 +74,12 @@ const StepCarousel = ({ steps }) => {
 
 export default ({ onClose }) => {
   const steps = [
-    { picture: first, description: "First step" },
-    { picture: first, description: "Second step" },
-    { picture: first, description: "En este paso nos aseguramos que el resumen cumpla su función de presentar información fácil de escanear En este paso nos aseguramos que el resumen cumpla su función de presentar información fácil de escanear" },
+    { picture: InformPicture, description: "Se recopila la materia de química desde el material brindado por la profesora." },
+    { picture: PlanPicture, description: "Se defino cómo se va a estructurar la información (mapa conceptual, tablas, párrafos, entre otros), además, se define un tiempo para escribir cada parte del resumen." },
+    { picture: DecidePicture, description: "Se hace un análisis de las ventajas y desventajas de los medios disponibles para escribir el resumen (papel y lapicero, digital o infografías) y con base a este análisis se escoge un medio. En este caso, se decide escribir el resumen con papel y lapicero" },
+    { picture: ExecutePicture, description: "Se escriben las distintas partes del resumen en los tiempos establecidos." },
+    { picture: ControlPicture, description: "Después de escribir cada parte, se lee la parte para ver si la información está resumida de la manera correcta, contiene toda la información necesaria y la información se puede escanear fácilmente. Si la parte no cumple los requisitos, se tacha y se reescribe de la manera correcta." },
+    { picture: EvaluatePicture, description: "Cuando el resumen está listo, se estudia y se verifica que se pueda aprender fácilmente mediante este. Se pone en práctica el conocimiento adquirido mediante el resumen con una práctica asignada por la profesora." },
   ]
 
   return (
