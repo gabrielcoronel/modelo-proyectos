@@ -1,7 +1,15 @@
+import 'animate.css'
 import { useState } from 'react'
 import { useHover } from '../utilities/hooks'
 import Modal from 'react-modal'
 import StepExamples from './StepExamples'
+import InformPicture from '../assets/steps-pictures/informar.png'
+import PlanPicture from '../assets/steps-pictures/planificar.png'
+import DecidePicture from '../assets/steps-pictures/decidir.png'
+import ExecutePicture from '../assets/steps-pictures/ejecutar.png'
+import ControlPicture from '../assets/steps-pictures/controlar.png'
+import EvaluatePicture from '../assets/steps-pictures/valorar.png'
+
 
 const StepCircle = ({ number, isSelected }) => {
   const [isHovering, hoveringEvents] = useHover()
@@ -64,7 +72,7 @@ const StepExamplesButton = ({ onClick }) => {
 }
 
 const Step = ({
-  title, description, examples, number, isSelected, onSelect, hideBar
+  title, description, examples, picture, number, isSelected, onSelect, hideBar
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
@@ -92,19 +100,15 @@ const Step = ({
           {
             isSelected ?
               (
-                <span className="text-lg text-text ease-in-out">
-                  {description}
-                </span>
-              ) :
-              null
-          }
+                <div className="flex flex-col gap-y-4 max-w-80 animate__animated animate__fadeIn">
+                  <span className="text-lg text-text ease-in-out">
+                    {description}
+                  </span>
 
-          {
-            isSelected ?
-              (
-                <StepExamplesButton
-                  onClick={() => setIsModalOpen(true)}
-                />
+                  <StepExamplesButton
+                    onClick={() => setIsModalOpen(true)}
+                  />
+                </div>
               ) :
               null
           }
@@ -116,13 +120,16 @@ const Step = ({
         onRequestClose={() => setIsModalOpen(false)}
         style={{
           content: {
-            padding: 0
+            padding: 0,
+            height: "fit-content",
+            margin: "auto"
           }
         }}
       >
         <StepExamples
           title={title}
           examples={examples}
+          picture={picture}
           onClose={() => setIsModalOpen(false)}
         />
       </Modal>
@@ -133,13 +140,14 @@ const Step = ({
 const Stepper = ({ steps }) => {
   const [selectedIndex, setSelectedIndex] = useState(0)
 
-  const stepsElements = steps.map(({ title, description, examples }, index) => {
+  const stepsElements = steps.map(({ title, description, examples, picture }, index) => {
     return (
       <Step
         key={index}
         title={title}
         description={description}
         examples={examples}
+        picture={picture}
         number={index + 1}
         isSelected={index === selectedIndex}
         onSelect={() => setSelectedIndex(index)}
@@ -160,6 +168,7 @@ export default () => {
     {
       title: "Informar",
       description: "Los integrantes se dedican a recopilar información de diversas fuentes como el Internet, los libros, entre otros. Esto con el fin de construir una base de conocimiento útil para la realización del proyecto.",
+      picture: InformPicture,
       examples: [
         {
           project: "Cocinar una pizza",
@@ -174,6 +183,7 @@ export default () => {
     {
       title: "Planificar",
       description: "Se elabora un plan de trabajo que indica las tareas necesarias para la realización del proyecto, sus respectivos tiempos, junto con las herramientas y/o medios a utilizar para el cumplimiento de tales tareas. Este plan de trabajo es solo una aproximación de cómo se va a realizar el proyecto, entonces es necesario disponer de una margen abierto en cada aspecto, para realizar adaptaciones justificadas debido a las circunstancias en caso de ser necesario.",
+      picture: PlanPicture,
       examples: [
         {
           project: "Ir de viaje a Luxemburgo",
@@ -188,6 +198,7 @@ export default () => {
     {
       title: "Decidir",
       description: "Los integrantes deciden cuál de las posibles estrategias seguir para realizar el proyecto de la manera más efectiva posible.",
+      picture: DecidePicture,
       examples: [
         {
           project: "Trasladarse de Cartago a San José",
@@ -202,6 +213,7 @@ export default () => {
     {
       title: "Ejecutar",
       description: "Los integrantes realizan las tareas asignadas según el plan de trabajo previamente elaborado, en los tiempos establecidos, usando las herramientas y/o medios definidos.",
+      picture: ExecutePicture,
       examples: [
         {
           project: "Desarrollar una solución tecnológica para visualizar el precio en tiempo real de las acciones comunes de distintas entidades registradas en la Bolsa Nacional de Valores",
@@ -216,6 +228,7 @@ export default () => {
     {
       title: "Controlar",
       description: "Durante la ejecución, constantemente se comparan los resultados parciales de las tareas con los resultados esperados respectivos. Además, se hacen las correcciones requeridas de manera continua.",
+      picture: ControlPicture,
       examples: [
         {
           project: "Pintar una pared de concreto",
@@ -230,6 +243,7 @@ export default () => {
     {
       title: "Valorar",
       description: "Una vez finalizado el proyecto, los integrantes realizan una autoevaluación sobre el producto final del proyecto y el proceso de realización de este. De esta manera, los integrantes identifican los posibles errores cometidos durante el proceso de realización del proyecto.",
+      picture: EvaluatePicture,
       examples: [
         {
           project: "Preparar una exposición sobre las bases de datos relacionales",

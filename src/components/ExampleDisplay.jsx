@@ -1,3 +1,4 @@
+import 'animate.css'
 import { useState } from 'react'
 import { useHover } from '../utilities/hooks'
 import { GrPrevious, GrNext } from "react-icons/gr"
@@ -51,7 +52,8 @@ const StepCarousel = ({ steps }) => {
       />
 
       <div
-        className="flex flex-col justify-center items-center w-2/3"
+        key={currentIndex}
+        className="flex flex-col justify-center items-center w-2/3 animate__animated animate__fadeIn"
       >
         <img
           className="h-full w-60 rounded-md -rotate-90"

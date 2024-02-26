@@ -2,7 +2,7 @@ import ModalCloseButton from './ModalCloseButton'
 
 const ExampleTile = ({ project, instruction }) => {
   return (
-    <div className="flex flex-col items-start gap-y-3 w-1/2">
+    <div className="flex flex-col items-start gap-y-3 w-full">
       <span className="text-xl font-bold text-text">
         {project}
       </span>
@@ -14,7 +14,7 @@ const ExampleTile = ({ project, instruction }) => {
   )
 }
 
-export default ({ title, examples, onClose }) => {
+export default ({ title, examples, picture, onClose }) => {
   const exampleTiles = examples.map(({ project, instruction }, index) => {
     return (
       <ExampleTile
@@ -34,8 +34,17 @@ export default ({ title, examples, onClose }) => {
         <ModalCloseButton onClose={onClose} />
       </div>
 
-      <div className="flex flex-col gap-y-7 grow w-full">
-        {exampleTiles}
+      <div className="flex flex-row justify-center items-center">
+        <div className="flex flex-col gap-y-7 grow w-1/2">
+          {exampleTiles}
+        </div>
+
+        <div className="flex justify-center items-center grow w-1/2">
+          <img
+            className="w-80 h-80 py-7"
+            src={picture}
+          />
+        </div>
       </div>
     </div>
   )
