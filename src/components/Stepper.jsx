@@ -1,6 +1,7 @@
 import 'animate.css'
 import { useState } from 'react'
 import { useHover } from '../utilities/hooks'
+import { GoDotFill } from "react-icons/go"
 import Modal from 'react-modal'
 import StepExamples from './StepExamples'
 import InformPicture from '../assets/steps-pictures/informar.png'
@@ -72,7 +73,7 @@ const StepExamplesButton = ({ onClick }) => {
 }
 
 const Step = ({
-  title, description, examples, picture, number, isSelected, onSelect, hideBar
+  title, description, examples, picture, number, isSelected, onSelect, hideBar, isInitial
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
@@ -92,7 +93,7 @@ const Step = ({
           }
         </div>
 
-        <div className="flex flex-col gap-y-4 pt-7 max-w-80">
+        <div className="flex flex-col gap-y-4 pt-7 max-w-96">
           <span className="text-3xl font-bold text-text">
             {title}
           </span>
@@ -100,14 +101,21 @@ const Step = ({
           {
             isSelected ?
               (
-                <div className="flex flex-col gap-y-4 max-w-80 animate__animated animate__fadeIn">
+                <div className="flex flex-col gap-y-4 animate__animated animate__fadeIn">
                   <span className="text-lg text-text ease-in-out">
                     {description}
                   </span>
 
-                  <StepExamplesButton
-                    onClick={() => setIsModalOpen(true)}
-                  />
+                  {
+                    !isInitial ?
+                      (
+
+                        <StepExamplesButton
+                          onClick={() => setIsModalOpen(true)}
+                        />
+                      ) :
+                      null
+                  }
                 </div>
               ) :
               null
@@ -140,7 +148,7 @@ const Step = ({
 const Stepper = ({ steps }) => {
   const [selectedIndex, setSelectedIndex] = useState(0)
 
-  const stepsElements = steps.map(({ title, description, examples, picture }, index) => {
+  const stepsElements = steps.map(({ title, description, examples, picture, isInitial }, index) => {
     return (
       <Step
         key={index}
@@ -148,10 +156,11 @@ const Stepper = ({ steps }) => {
         description={description}
         examples={examples}
         picture={picture}
-        number={index + 1}
+        number={isInitial ? <GoDotFill /> : index}
         isSelected={index === selectedIndex}
         onSelect={() => setSelectedIndex(index)}
         hideBar={index === steps.length - 1}
+        isInitial={isInitial}
       />
     )
   })
@@ -165,6 +174,11 @@ const Stepper = ({ steps }) => {
 
 export default () => {
   const steps = [
+    {
+      title: "¿Qué es el modelo de proyectos?",
+      description: "Una metodología estructurada por fases para que realices efectivamente cualquiera de tus proyectos.",
+      isInitial: true
+    },
     {
       title: "Informar",
       description: "Los integrantes se dedican a recopilar información de diversas fuentes como el Internet, los libros, entre otros. Esto con el fin de construir una base de conocimiento útil para la realización del proyecto.",
@@ -182,7 +196,7 @@ export default () => {
     },
     {
       title: "Planificar",
-      description: "Se elabora un plan de trabajo que indica las tareas necesarias para la realización del proyecto, sus respectivos tiempos, junto con las herramientas y/o medios a utilizar para el cumplimiento de tales tareas. Este plan de trabajo es solo una aproximación de cómo se va a realizar el proyecto, entonces es necesario disponer de una margen abierto en cada aspecto, para realizar adaptaciones justificadas debido a las circunstancias en caso de ser necesario.",
+      description: "Se elabora un plan de trabajo que indica las tareas necesarias para la realización del proyecto, sus respectivos tiempos, junto con las herramientas y/o medios a utilizar para el cumplimiento de tales tareas. Este plan de trabajo es solo una aproximación de cómo se va a realizar el proyecto, entonces es necesario disponer de una margen abierto en cada aspecto, para realizar adaptaciones justificadas debido a las circunstancias, en caso de ser necesario.",
       picture: PlanPicture,
       examples: [
         {
@@ -258,11 +272,7 @@ export default () => {
   ]
 
   return (
-    <div className="flex flex-col justify-center items-center py-3 px-3 gap-y-3 bg-background">
-      <span className="text-lg text-text text-center max-w-96">
-        Realiza de manera efectiva cualquiera de tus proyectos con esta increíble metodología por fases
-      </span>
-
+    <div className="flex flex-col justify-center items-center py-3 px-5 bg-background">
       <Stepper steps={steps} />
     </div>
   )
