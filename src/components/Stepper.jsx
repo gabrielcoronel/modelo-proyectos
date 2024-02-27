@@ -219,7 +219,7 @@ export default () => {
           instruction: "Analizar las ventajas y desventajas de los medios de transporte que hay disponibles para transportarse de Cartago a San José, que son el autobús, el tren o algún tipo de taxi. Seguido, escoger el transporte más apropiado para las circunstancias presentes."
         },
         {
-          project: "Confeccionar los suéters de la generación 2024 del CTP Don Bosco",
+          project: "Confeccionar los suéteres de la generación 2024 del CTP Don Bosco",
           instruction: "Escoger uno de todos los proveedores de soluciones textiles que hay disponibles para la confección de los suéteres."
         }
       ]
@@ -230,7 +230,7 @@ export default () => {
       picture: ExecutePicture,
       examples: [
         {
-          project: "Desarrollar una solución tecnológica para visualizar el precio en tiempo real de las acciones comunes de distintas entidades registradas en la Bolsa Nacional de Valores",
+          project: "Informar a la población sobre el precio de las acciones comunes de las entidades registradas en la Bolsa Nacional de Valores",
           instruction: "Desarrollar una aplicación web que le permita a los usuarios visualizar los precios de las acciones de algunas de las entidades registradas en la Bolsa Nacional de Valores, en tiempo real."
         },
         {
@@ -246,11 +246,11 @@ export default () => {
       examples: [
         {
           project: "Pintar una pared de concreto",
-          instruction: "Pasar las manos de pintura que sean necesarias para que la pared quede bien pintada si de momento no está bien pintada."
+          instruction: "Pasar las manos de pintura que sean necesarias para que la pared quede bien pintada, si de momento no está bien pintada."
         },
         {
-          project: "Realizar un exámen de estudios sociales",
-          instruction: "Resolver primero los ítems del examen con el mayor valor de puntos si el tiempo restante no es suficiente para completar todo el examen."
+          project: "Bajar de peso",
+          instruction: "Pesar mi cuerpo periódicamente para medir mi progreso y dimensionar la efectividad de mi dieta y rutina de ejercicios. Si mi dieta o rutina de ejercicios no está siendo efectiva, modificarla apropiadamente."
         }
       ]
     },
@@ -261,7 +261,7 @@ export default () => {
       examples: [
         {
           project: "Preparar una exposición sobre las bases de datos relacionales",
-          instruction: "Practicar la exposición para ver si es contundente e identificar errores en la exposición que la hacen no contundente de ser el caso."
+          instruction: "Practicar la exposición para ver si es efectiva e identificar errores en la exposición que la hacen inefectiva de ser el caso."
         },
         {
           project: "Realizar el correo del amor y la amistad en el CTP Don Bosco",
