@@ -1,5 +1,5 @@
 import 'animate.css'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useHover } from '../utilities/hooks'
 import { GrPrevious, GrNext } from "react-icons/gr"
 import ModalCloseButton from './ModalCloseButton'
@@ -27,26 +27,33 @@ const CarouselButton = ({ icon, onClick, isHidden }) => {
 }
 
 const StepCarousel = ({ steps, index, onChangeIndex }) => {
+  const autoplayIntervalSeconds = 7
   const canIncrementIndex = index < steps.length - 1
   const canDecrementIndex = index > 0
 
-  const incremenetCurrentIndex = () => {
+  const incrementIndex = () => {
     if (canIncrementIndex) {
       onChangeIndex(index + 1)
     }
   }
 
-  const decremenetCurrentIndex = () => {
+  const decrementIndex = () => {
     if (canDecrementIndex) {
       onChangeIndex(index - 1)
     }
   }
 
+  useEffect(() => {
+    const timeout = setTimeout(incrementIndex, autoplayIntervalSeconds * 1000)
+
+    return (() => clearTimeout(timeout))
+  }, [index])
+
   return (
     <div className="bg-background flex justify-evenly items-center gap-x-3 w-full">
       <CarouselButton
         icon={<GrPrevious />}
-        onClick={decremenetCurrentIndex}
+        onClick={decrementIndex}
         isHidden={!canDecrementIndex}
       />
 
@@ -66,7 +73,7 @@ const StepCarousel = ({ steps, index, onChangeIndex }) => {
 
       <CarouselButton
         icon={<GrNext />}
-        onClick={incremenetCurrentIndex}
+        onClick={incrementIndex}
         isHidden={!canIncrementIndex}
       /> 
     </div>
